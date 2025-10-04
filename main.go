@@ -3,19 +3,16 @@ package main
 import (
 	_ "fmt"
 
-	"github.com/gin-gonic/gin"
+	"github.com/Concentration-point/notebook/config"
+	"github.com/Concentration-point/notebook/routes"
 )
 
 func main() {
+	// 初始化数据库
+	config.InitDB()
 
 	// 创建Gin路由实例
-	r := gin.Default()
-
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "收到",
-		})
-	})
+	r := routes.SetUpRouter()
 
 	r.Run(":8080")
 }
