@@ -35,7 +35,7 @@ func AuthMiddleware() gin.HandlerFunc {
 		claims := &Claims{}
 		token, err := jwt.ParseWithClaims(tokenString, claims,
 			func(token *jwt.Token) (interface{}, error) {
-				return []byte("your-secret-key"), nil
+				return []byte("f47ac10b7dc959e9487c96a3d61ca9aa6390b6c7a61b78b271cf9c99562319"), nil
 			})
 		if err != nil || !token.Valid {
 			ctx.JSON(http.StatusUnauthorized, gin.H{

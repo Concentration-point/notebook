@@ -151,8 +151,8 @@ func Login(c *gin.Context) {
 	}
 
 	// 生成token
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, claims)
-	tokenString, err := token.SignedString([]byte("your-secret-key"))
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString([]byte("f47ac10b7dc959e9487c96a3d61ca9aa6390b6c7a61b78b271cf9c99562319"))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"code":    500,
