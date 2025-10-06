@@ -20,6 +20,17 @@ type RegisterRequest struct {
 	Password string `json:"password" bingding:"required,min=6"`
 }
 
+// @Summary 用户注册
+// @Description 注册新用户
+// @Tags users
+// @Accept json
+// @Produce json
+// @Param user body RegisterRequest true "用户名和密码"
+// @Success 201 {object} gin.H{code=int,message=string,data=object}
+// @Failure 400 {object} gin.H{code=int,message=string}
+// @Failure 409 {object} gin.H{code=int,message=string}
+// @Failure 500 {object} gin.H{code=int,message=string}
+// @Router /api/register [post]
 func Register(c *gin.Context) {
 	// 1. 绑定并校验请求参数
 	var req RegisterRequest
@@ -99,6 +110,17 @@ type LoginRequest struct {
 	Password string `json:"password" binding:"required"`
 }
 
+// @Summary 用户登录
+// @Description 用户登录并获取Token
+// @Tags users
+// @Accept json
+// @Produce json
+// @Param user body LoginRequest true "用户名和密码"
+// @Success 200 {object} gin.H{code=int,message=string,data=object{token=string,expires_at=int,user=object}}
+// @Failure 400 {object} gin.H{code=int,message=string}
+// @Failure 401 {object} gin.H{code=int,message=string}
+// @Failure 500 {object} gin.H{code=int,message=string}
+// @Router /api/login [post]
 // 登录接口，用于生成JWT
 func Login(c *gin.Context) {
 	var req LoginRequest
@@ -182,6 +204,18 @@ type NoteRequest struct {
 	Content string `json:"content"`
 }
 
+// @Summary 创建笔记
+// @Description 创建一条新笔记
+// @Tags notes
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "Bearer Token"
+// @Param note body NoteRequest true "笔记标题和内容"
+// @Success 201 {object} gin.H{code=int,message=string,data=object}
+// @Failure 400 {object} gin.H{code=int,message=string}
+// @Failure 401 {object} gin.H{code=int,message=string}
+// @Failure 500 {object} gin.H{code=int,message=string}
+// @Router /api/notes [post]
 func CreateNote(c *gin.Context) {
 	// 获取在拦截器中设置用户id
 	// 1. 从 Token 中获取当前用户 ID

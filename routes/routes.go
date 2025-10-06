@@ -1,13 +1,19 @@
 package routes
 
 import (
+	_ "github.com/Concentration-point/notebook/docs" // 引入生成的docs包
 	"github.com/Concentration-point/notebook/handlers"
 	"github.com/Concentration-point/notebook/middleware"
 	"github.com/gin-gonic/gin"
+	// swaggerFiles "github.com/swaggo/files"
+	// ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func SetUpRouter() *gin.Engine {
 	r := gin.Default()
+
+	// // Swagger 路由
+	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	public := r.Group("/api")
 	{
